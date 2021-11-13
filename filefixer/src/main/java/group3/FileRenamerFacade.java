@@ -27,8 +27,10 @@ public class FileRenamerFacade implements FileRenamer{
 
     @Override
     public void renameFiles() {
-        
-        
+        filesToBeRenamed = fileCollector.getFiles();
+        renamedFiles = fileProcessor.renameFiles(filesToBeRenamed);
+        missingSubmissions = ((Convention2FileProcessor)fileProcessor).getMissingSubmissions();
+        fileSaver.saveFiles(renamedFiles);
     }
     
 }
