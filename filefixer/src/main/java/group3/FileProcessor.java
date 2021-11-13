@@ -8,12 +8,13 @@ public abstract class FileProcessor {
 
     private Collection<File> originalFileNames;
 
-    public FileProcessor(Collection<File> filesToBeRenamed){
-        this.originalFileNames = filesToBeRenamed;
-
+    public FileProcessor(){
+        // empty constructor
     }
+
     
     public Collection<File> renameFiles(Collection<File> filesToBeRenamed) {
+        this.originalFileNames = filesToBeRenamed;
         Collection<File> renamedFiles = new ArrayList<>();
         String fileInfo;
         

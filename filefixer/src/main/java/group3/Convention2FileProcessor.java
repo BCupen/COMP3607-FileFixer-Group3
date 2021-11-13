@@ -5,8 +5,8 @@ import java.util.Collection;
 
 public class Convention2FileProcessor extends FileProcessor{
 
-    public Convention2FileProcessor(Collection<File> filesToBeRenamed) {
-        super(filesToBeRenamed);
+    public Convention2FileProcessor() {
+        super();
     }
 
     public Collection<String> getMissingSubmissions() {

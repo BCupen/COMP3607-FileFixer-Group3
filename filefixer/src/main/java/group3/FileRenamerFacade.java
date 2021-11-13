@@ -21,7 +21,7 @@ public class FileRenamerFacade implements FileRenamer{
 
 
         fileCollector = new FileCollector();
-        fileProcessor = new Convention2FileProcessor(filesToBeRenamed);
+        fileProcessor = new Convention2FileProcessor();
         fileSaver = new FileSaver();
     }
 
