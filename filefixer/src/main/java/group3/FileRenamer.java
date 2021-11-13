@@ -1,4 +1,4 @@
-package com.group3;
+package group3;
 
 public interface FileRenamer {
     public void renameFiles();
