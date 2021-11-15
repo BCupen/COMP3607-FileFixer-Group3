@@ -1,34 +1,14 @@
 package group3;
 
 import java.io.File;
-import java.util.Collection;
 
-public class Convention2FileProcessor extends FileProcessor{
+public interface Convention2FileProcessor {
+    
+  
 
-    public Convention2FileProcessor() {
-        super();
-    }
-
-    public Collection<String> getMissingSubmissions() {
-        return null;
-    }
-
-    @Override
-    public void trimFile(File file) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void stitchFile(File file, String fileInfo) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public String getFileInfo(String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public File renameFile();
+    public abstract String trimFile();
+    public abstract String stitchFile();
+    public abstract String getFileInfo();
 
 }

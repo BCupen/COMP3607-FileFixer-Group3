@@ -17,19 +17,29 @@ public class FileRenamerFacade implements FileRenamer{
     public FileRenamerFacade(){
         filesToBeRenamed = new ArrayList<>();
         renamedFiles = new ArrayList<>();
-        missingSubmissions = new ArrayList<>();
-
+        missingSubmissions=(new ArrayList<>());
 
         fileCollector = new FileCollector();
-        fileProcessor = new Convention2FileProcessor();
+        fileProcessor = new FileProcessor();
         fileSaver = new FileSaver();
     }
+
+
+    public Collection<String> getMissingSubmissions() {
+        return missingSubmissions;
+    }
+
+
+    public void setMissingSubmissions(Collection<String> missingSubmissions) {
+        this.missingSubmissions = missingSubmissions;
+    }
+
 
     @Override
     public void renameFiles() {
         filesToBeRenamed = fileCollector.getFiles();
         renamedFiles = fileProcessor.renameFiles(filesToBeRenamed);
-        missingSubmissions = ((Convention2FileProcessor)fileProcessor).getMissingSubmissions();
+        setMissingSubmissions(fileProcessor.getMissingSubmissions());
         fileSaver.saveFiles(renamedFiles);
     }
     

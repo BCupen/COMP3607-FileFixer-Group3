@@ -14,7 +14,7 @@ public class FileCollector {
     }
 
     public Collection<File> getFiles(){
-        File path =  new File("./filefixer/src/lib/filesToRename/sample3"); //can be changed according to sample data used
+        File path =  new File("./filefixer/src/lib/filesToRename/sample5"); //can be changed according to sample data used
         List<File> allfiles = Arrays.asList(path.listFiles());
 
         for(File f: allfiles){
