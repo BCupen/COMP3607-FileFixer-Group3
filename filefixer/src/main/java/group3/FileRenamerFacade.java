@@ -40,7 +40,7 @@ public class FileRenamerFacade implements FileRenamer{
         filesToBeRenamed = fileCollector.getFiles("./filefixer/src/lib/filesToRename/sample3");
         renamedFiles = fileProcessor.renameFiles(filesToBeRenamed);
         setMissingSubmissions(fileProcessor.getMissingSubmissions());
-        fileSaver.saveFiles(renamedFiles);
+        fileSaver.saveFiles(filesToBeRenamed, renamedFiles);
     }
     
 }

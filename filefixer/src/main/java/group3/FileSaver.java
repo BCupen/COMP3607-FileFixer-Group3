@@ -1,6 +1,8 @@
 package group3;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,15 +18,9 @@ public class FileSaver {
     
     }
 
-    public void setOriginalFileNames(String loc){
-        FileCollector originalfiles = new FileCollector();
-        originalFileNames = originalfiles.getFiles(loc);  // parse the path as parameter
-    }
-
-    public void saveFiles(Collection<File> renamedFiles) {
+    public void saveFiles(Collection<File> originalFileNames, Collection<File> renamedFiles) {
         
-        // raw file names should be pre-processed and converted to convention(1)
-        setOriginalFileNames("./filefixer/src/lib/filesToRename/sample3"); 
+        setOrginalFileNames(originalFileNames);
 
         File dir = new File("./filefixer/src/lib/filesToRename/renamedFiles");
 
@@ -36,13 +32,13 @@ public class FileSaver {
                 File origFile = originalFiles.next();
                 File newFile = newFilesNames.next();
 
-                if (origFile.renameTo(newFile)){
-                    System.out.println("Renamed");
+                try {
+                    Files.copy(origFile.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                else
-                    System.out.println("Not renamed");              
+             }
             }
-        }
         else
             System.out.println("Oops, Something went wrong! Unable to create 'renamedFiles'");
         
@@ -52,9 +48,15 @@ public class FileSaver {
         return this.originalFileNames;
     }
 
+    public void setOrginalFileNames(Collection <File> originalFileNames){
+        this.originalFileNames = originalFileNames;
+    }
+
     public Collection<File> getNewFileNames(){
         return this.newFileNames;
     }
+
+    
 
     
 }
