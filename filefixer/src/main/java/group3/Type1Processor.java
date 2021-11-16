@@ -7,7 +7,7 @@ public class Type1Processor implements Convention2FileProcessor{
 
     private File file;
 
-    public Type1Processor(File file, File csvFile){
+    public Type1Processor(File file, File csvFile){ 
         super();
         this.file=file;
     }

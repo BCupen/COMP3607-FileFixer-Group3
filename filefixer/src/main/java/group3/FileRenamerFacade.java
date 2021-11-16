@@ -37,7 +37,7 @@ public class FileRenamerFacade implements FileRenamer{
 
     @Override
     public void renameFiles() {
-        filesToBeRenamed = fileCollector.getFiles();
+        filesToBeRenamed = fileCollector.getFiles("./filefixer/src/lib/filesToRename/sample3");
         renamedFiles = fileProcessor.renameFiles(filesToBeRenamed);
         setMissingSubmissions(fileProcessor.getMissingSubmissions());
         fileSaver.saveFiles(renamedFiles);

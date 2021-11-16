@@ -13,8 +13,8 @@ public class FileCollector {
         files =  new ArrayList<>();
     }
 
-    public Collection<File> getFiles(){
-        File path =  new File("./filefixer/src/lib/filesToRename/sample5"); //can be changed according to sample data used
+    public Collection<File> getFiles(String loc){
+        File path =  new File(loc); // change location without having to modify File Collector
         List<File> allfiles = Arrays.asList(path.listFiles());
 
         for(File f: allfiles){
@@ -22,9 +22,9 @@ public class FileCollector {
                 files.add(f);
         }
 
-        for(File f: files){
-            System.out.println(f.getName());
-        }
+        // for(File f: files){
+        //     System.out.println(f.getName());
+        // }
         
 
         return files;
