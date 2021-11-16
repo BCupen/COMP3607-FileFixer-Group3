@@ -24,7 +24,7 @@ public class FileSaver {
 
         File dir = new File("./filefixer/src/lib/filesToRename/renamedFiles");
 
-        if (dir.mkdir()){
+        if (dir.mkdir() || !dir.isDirectory()){
             Iterator<File> originalFiles = originalFileNames.iterator();
             Iterator<File> newFilesNames = renamedFiles.iterator();
 
@@ -39,7 +39,7 @@ public class FileSaver {
                 }
              }
             }
-        else
+        else 
             System.out.println("Oops, Something went wrong! Unable to create 'renamedFiles'");
         
     }
