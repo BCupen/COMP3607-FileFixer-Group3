@@ -26,8 +26,7 @@ public class FileSaver {
         // raw file names should be pre-processed and converted to convention(1)
         setOriginalFileNames("./filefixer/src/lib/filesToRename/sample3"); 
 
-        String path = "./filefixer/src/lib/filesToRename/renamedFiles";
-        File dir = new File(path);
+        File dir = new File("./filefixer/src/lib/filesToRename/renamedFiles");
 
         if (dir.mkdir()){
             Iterator<File> originalFiles = originalFileNames.iterator();
