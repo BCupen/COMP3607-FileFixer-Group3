@@ -4,17 +4,18 @@ import java.io.File;
 import java.util.regex.*;
 
 public class matchType {
-    private Pattern pattern1 = Pattern.compile("^.*_[0-9]+_assignsubmission_file_.*$");
-    private Pattern pattern2 = Pattern
-            .compile("^[0-9]+-[0-9]+_[a-zA-Z]+_[a-zA-Z]+-[a-zA-Z]+_[0-9]+_[a-zA-Z]+\\d_[0-9]+\\.[a-zA-Z]+$");
     private File file;
+    private String name = null;
+    private Pattern pattern1 = Pattern.compile("^.*_[0-9]+_assignsubmission_file_.*$");
+    private Pattern pattern2 = Pattern.compile("^[0-9]+-[0-9]+_([a-zA-Z]+((_)?(OΓÇÖ)?(-)?[a-zA-Z]+)+)_[0-9]+_.*$");
     private Pattern ID = Pattern.compile("81\\d\\d\\d\\d\\d\\d");
     private Pattern threeNamewithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+_[a-zA-Z]+");
     private Pattern NamewithWhiteSpace = Pattern.compile("[a-zA-Z]+\\s+[a-zA-Z]+");
     private Pattern threeNameswithSpaces = Pattern.compile("[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+");
     private Pattern twoNamewithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+");
     private Pattern nameNoSpaces=Pattern.compile("[A-Z][a-zA-Z]+[A-Z]+[a-zA-Z]+");
-    private String name = null;
+    private Pattern Identifier=Pattern.compile("61\\d\\d\\d\\d");
+   
 
     public matchType(File file) {
         this.file = file;
@@ -24,11 +25,11 @@ public class matchType {
         Matcher m = pattern1.matcher(file.getName());
         Matcher k = pattern2.matcher(file.getName());
         if (m.matches()) {
-            return "Type1";
+            return "Convention2";
         } else if (k.matches()) {
-            return "Type2";
+            return "Convention1";
         } else {
-            return "Type3";
+            return "NoConvention";
         }
     }
 
@@ -68,6 +69,14 @@ public class matchType {
                 }
             }
             return name;
+        }
+        return null;
+    }
+    
+    public String getIdentifier(){
+        Matcher match = Identifier.matcher(file.getName());
+        if(match.find()){
+            return match.group();
         }
         return null;
     }

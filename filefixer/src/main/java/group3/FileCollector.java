@@ -8,27 +8,40 @@ import java.util.List;
 
 public class FileCollector {
     private Collection<File> files;
-    
-    public FileCollector(){
-        files =  new ArrayList<>();
+    private File csv = null;
+
+    public FileCollector() {
+        files = new ArrayList<>();
+
     }
 
-    public Collection<File> getFiles(String loc){
-        File path =  new File(loc); // change location without having to modify File Collector
-        List<File> allfiles = Arrays.asList(path.listFiles());
+    public Collection<File> getFiles(File loc) {
+        List<File> allfiles = Arrays.asList(loc.listFiles());
 
-        for(File f: allfiles){
-            if(!f.isDirectory() && f.getName().endsWith(".pdf"))  //only get the pdf files
+        for (File f : allfiles) {
+            if (!f.isDirectory() && f.getName().endsWith(".pdf")) // only get the pdf files
                 files.add(f);
-        }
 
-        // for(File f: files){
-        //     System.out.println(f.getName());
-        // }
-        
+            if (files.isEmpty()) {
+                System.out.println("No PDF files found...Listing Missing Submissions");
+            }
+        }
 
         return files;
     }
 
+    public File getCSV(File loc) {
+        List<File> allfiles = Arrays.asList(loc.listFiles());
+
+        for (File f : allfiles) {
+            if (!f.isDirectory() && f.getName().endsWith(".csv"))
+                this.csv = f;
+        }
+        if (csv == null) {
+            System.out.println("No CSV file found...Terminating Program");
+            System.exit(0);
+        }
+        return csv;
+    }
 
 }

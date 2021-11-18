@@ -2,19 +2,40 @@ package group3;
 
 import java.io.*;
 
-public class Type2Processor implements Convention2FileProcessor {
+public class Con1ToCon2Processor implements ConventionFileProcessor {
 
     private File csvFile;
     private File file;
     private String fileInfo;
     private matchType findMatch;
     private String Identifier;
+    private String[] fileName1;
     private String fileName;
+    private String OriginalFileName=null;
+    
 
-    public Type2Processor(File file, File csvFile) {
+    public Con1ToCon2Processor(File file, File csvFile, String OriginalFileName) {
         super();
         this.csvFile = csvFile;
         this.file = file;
+        this.OriginalFileName=OriginalFileName;
+    }
+    public Con1ToCon2Processor(File file, File csvFile) {
+        super();
+        this.csvFile = csvFile;
+        this.file = file;
+    }
+    public String getOriginalFileName(){
+        if(this.OriginalFileName==null){
+            fileName1=file.getName().split("_");
+            if(fileName1[fileName1.length-2].contains("601")){
+            OriginalFileName=fileName1[fileName1.length-1];
+            }
+            else{
+                OriginalFileName=fileName1[fileName1.length-2]+"_"+fileName1[fileName1.length-1];
+            }
+        }
+        return this.OriginalFileName;
     }
 
     @Override
@@ -66,11 +87,11 @@ public class Type2Processor implements Convention2FileProcessor {
     @Override
     public String stitchFile() {
         if(this.getFileInfo()!=null){
-        fileName = this.getFileInfo()+file.getName();
+        fileName = this.getFileInfo()+this.getOriginalFileName();
         return fileName;
         }
         else{
-            return "";
+            return null;
         }
 
     }
@@ -79,7 +100,7 @@ public class Type2Processor implements Convention2FileProcessor {
     public File renameFile() {
         if(this.stitchFile()!=null){
         fileName=this.stitchFile();
-        file = new File("./filefixer/src/lib/filesToRename/renamedFiles/"+fileName);
+        file = new File(file.getParent()+"/"+"renamedFiles/"+fileName);
         return file;
         }
         else{
