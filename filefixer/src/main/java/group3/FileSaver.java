@@ -1,11 +1,10 @@
 package group3;
 
+import java.util.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+
 
 public class FileSaver {
 
@@ -18,8 +17,8 @@ public class FileSaver {
 
     }
 
-    public void saveFiles(Collection<File> originalFileNames, Collection<File> renamedFiles,
-            Collection<String> missingSubmissions, String location) {
+    public void saveFiles(Collection<File> originalFileNames, Collection<File> renamedFiles, String location) {
+   
         if (!renamedFiles.isEmpty()) {
             setOrginalFileNames(originalFileNames);
 
@@ -43,7 +42,16 @@ public class FileSaver {
             } else {
                 System.out.println("Oops, Something went wrong! Unable to create 'renamedFiles'");
             }
-        } if(!missingSubmissions.isEmpty()) {
+        } 
+        else{
+           
+                System.out.println("No Renamed Files");
+         
+        }
+    }
+
+    public void getMissingSubmissions( Collection<String> missingSubmissions, String location){
+        if(!missingSubmissions.isEmpty()) {
             File dir = new File(location + "/" + "missingSubmission.txt");
             Iterator<String> missingNames = missingSubmissions.iterator();
             String names = "";
@@ -64,6 +72,9 @@ public class FileSaver {
                 e.printStackTrace();
             }
 
+        }
+        else{
+            System.out.println("No Missing Submissions");
         }
     }
 

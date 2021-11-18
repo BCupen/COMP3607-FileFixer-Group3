@@ -33,6 +33,7 @@ public class FileProcessor {
                     this.renamedFiles.add(file);
                 }
             } else if (fileType.getFileType().equals("Convention2")) {
+                file = new File(file.getParent()+"/"+"renamedFiles/"+file.getName());
                 this.renamedFiles.add(file);
             } else {
                 strategy = new NoConventionProcessor(file, csvFile);
@@ -69,7 +70,6 @@ public class FileProcessor {
         boolean found = false;
 
         try {
-            System.out.println("Missing Submissions: ");
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             br.readLine();
             while ((line = br.readLine()) != null) {
@@ -86,7 +86,6 @@ public class FileProcessor {
                     fullName = assignment[1];
                     id = assignment[2];
                     studentInfo = fullName + "_" + id;
-                    System.out.println(studentInfo);
                     missingSubmissions.add(studentInfo);
                 }
 
@@ -95,9 +94,6 @@ public class FileProcessor {
             br.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (missingSubmissions.isEmpty()) {
-            System.out.println("No Missing Submissions");
         }
         return missingSubmissions;
 

@@ -61,7 +61,8 @@ public class FileRenamerFacade implements FileRenamer {
         }
         setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
 
-        fileSaver.saveFiles(filesToBeRenamed, renamedFiles, missingSubmissions, location.toPath().toString());
+        fileSaver.saveFiles(filesToBeRenamed, renamedFiles,location.toPath().toString());
+        fileSaver.getMissingSubmissions(missingSubmissions, location.toPath().toString());
 
     }
 
