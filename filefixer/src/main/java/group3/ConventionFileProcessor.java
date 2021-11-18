@@ -2,7 +2,7 @@ package group3;
 
 import java.io.File;
 
-public interface Convention2FileProcessor {
+public interface ConventionFileProcessor {
     
   
 
@@ -10,5 +10,6 @@ public interface Convention2FileProcessor {
     public abstract String trimFile();
     public abstract String stitchFile();
     public abstract String getFileInfo();
+    public abstract String getOriginalFileName();
 
 }
