@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
-
 public class FileCollector {
     private Collection<File> folders;
     private Collection<File> files;
@@ -16,12 +15,8 @@ public class FileCollector {
         folders = new ArrayList<>();
 
     }
-    public File unzipFile(File f) {
-        String fileName = f.toPath().toString();
-        File srcFile = new File(fileName);
-        String zipPath = f.getParent();
-        File temp = new File(zipPath);
-        temp.mkdir();
+
+    public File writeToFiles(File srcFile, String zipPath) {
         ZipFile zipfile = null;
         try {
             zipfile = new ZipFile(srcFile);
@@ -34,24 +29,16 @@ public class FileCollector {
                     if (entry.isDirectory()) {
                         continue;
                     } else {
-
-
                         BufferedInputStream bis = new BufferedInputStream(zipfile.getInputStream(entry));
-
                         int b;
                         byte buffer[] = new byte[1024];
-
                         FileOutputStream fos = new FileOutputStream(newDest);
-
                         BufferedOutputStream bos = new BufferedOutputStream(fos, 1024);
-
                         while ((b = bis.read(buffer, 0, 1024)) != -1) {
                             bos.write(buffer, 0, b);
                         }
-
                         bos.close();
                         bis.close();
-
                     }
                 }
 
@@ -68,6 +55,16 @@ public class FileCollector {
                 System.out.println("Error while closing zip file" + ioe);
             }
         }
+        return newDest;
+    }
+
+    public File unzipFile(File f) {
+        String fileName = f.toPath().toString();
+        File srcFile = new File(fileName);
+        String zipPath = f.getParent();
+        File temp = new File(zipPath);
+        temp.mkdir();
+        newDest = writeToFiles(srcFile, zipPath);
         if (newDest.getParent().contains("MACOSX")) {
             newDest = new File(newDest.getParentFile().getParentFile().getParentFile() + File.separator
                     + newDest.getParentFile().getParentFile().getParentFile().getName());
@@ -76,60 +73,13 @@ public class FileCollector {
         return newDest.getParentFile();
     }
 
-
     public File unzipSubFile(File f) {
         String fileName = f.toPath().toString();
         File srcFile = new File(fileName);
         String zipPath = fileName.substring(0, fileName.length() - 4);
         File temp = new File(zipPath);
         temp.mkdir();
-        ZipFile zipfile = null;
-        try {
-            zipfile = new ZipFile(srcFile);
-            Enumeration<? extends ZipEntry> e = zipfile.entries();
-            while (e.hasMoreElements()) {
-                ZipEntry entry = e.nextElement();
-                newDest = new File(zipPath, entry.getName());
-                if (!newDest.getParent().contains("MACOSX")) {
-                    newDest.getParentFile().mkdirs();
-                    
-                    if (entry.isDirectory()) {
-                        continue;
-                    } else {
-
-
-                        BufferedInputStream bis = new BufferedInputStream(zipfile.getInputStream(entry));
-
-                        int b;
-                        byte buffer[] = new byte[1024];
-
-                        FileOutputStream fos = new FileOutputStream(newDest);
-
-                        BufferedOutputStream bos = new BufferedOutputStream(fos, 1024);
-
-                        while ((b = bis.read(buffer, 0, 1024)) != -1) {
-                            bos.write(buffer, 0, b);
-                        }
-
-                        bos.close();
-                        bis.close();
-
-                    }
-                }
-
-            }
-
-        } catch (IOException ioe) {
-            System.out.println("Error opening zip file" + ioe);
-        } finally {
-            try {
-                if (zipfile != null) {
-                    zipfile.close();
-                }
-            } catch (IOException ioe) {
-                System.out.println("Error while closing zip file" + ioe);
-            }
-        }
+        newDest = writeToFiles(srcFile, zipPath);
         if (newDest.getParent().contains("MACOSX")) {
             newDest = new File(newDest.getParentFile().getParentFile().getParentFile() + File.separator
                     + newDest.getParentFile().getParentFile().getParentFile().getName());
