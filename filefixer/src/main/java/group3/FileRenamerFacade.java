@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class FileRenamerFacade implements FileRenamer {
+    private Collection<File> folders;
     private Collection<File> filesToBeRenamed;
     private Collection<File> renamedFiles;
     private Collection<String> missingSubmissions;
@@ -19,8 +20,7 @@ public class FileRenamerFacade implements FileRenamer {
     public FileRenamerFacade(File Loc) {
         filesToBeRenamed = new ArrayList<>();
         renamedFiles = new ArrayList<>();
-        missingSubmissions = (new ArrayList<>());
-
+        missingSubmissions = new ArrayList<>();
         fileCollector = new FileCollector();
         fileProcessor = new FileProcessor();
         fileSaver = new FileSaver();
@@ -35,34 +35,33 @@ public class FileRenamerFacade implements FileRenamer {
         this.missingSubmissions = missingSubmissions;
     }
 
+    public Collection<File> getConvention1Files() {
+        return convention1Files;
+    }
+
     @Override
     public void renameFiles() {
-        filesToBeRenamed = fileCollector.getFiles(location);
-        csvFile = fileCollector.getCSV(location);
-        System.out.println("ALL FILES");
-        for (File file : filesToBeRenamed) {
 
-            System.out.println(file.getName());
+        folders = fileCollector.getFolders(location);
 
+        for (File f : folders) {
+            System.out.println(f.getName()+" : ");
+            filesToBeRenamed = fileCollector.getFiles(f);
+            csvFile = fileCollector.getCSV(f);
+            convention1Files = fileProcessor.renameFiles(filesToBeRenamed, csvFile);
+            renamedFiles = fileProcessor.getRenamedFiles();
+            setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
+            fileSaver.saveFiles(filesToBeRenamed, renamedFiles, f.toPath().toString());
+            fileSaver.getMissingSubmissions(missingSubmissions, f.toPath().toString());
+            System.out.println("______________________________________________________________________________________________________");
+
+            fileCollector = new FileCollector();
+            filesToBeRenamed = new ArrayList<>();
+            renamedFiles = new ArrayList<>();
+            missingSubmissions = new ArrayList<>();
+            fileProcessor = new FileProcessor();
+            fileSaver = new FileSaver();
         }
-        convention1Files = fileProcessor.renameFiles(filesToBeRenamed, csvFile);
-        System.out.println("ALL CONVENTION 1 FILES");
-        for (File file : convention1Files) {
-
-            System.out.println(file.getName());
-
-        }
-        renamedFiles = fileProcessor.getRenamedFiles();
-        System.out.println("ALL RENAMED FILES");
-        for (File file : renamedFiles) {
-
-            System.out.println(file.getName());
-
-        }
-        setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
-
-        fileSaver.saveFiles(filesToBeRenamed, renamedFiles,location.toPath().toString());
-        fileSaver.getMissingSubmissions(missingSubmissions, location.toPath().toString());
 
     }
 

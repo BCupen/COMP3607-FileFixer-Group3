@@ -10,6 +10,7 @@ public class FileProcessor {
     private Collection<File> renamedFiles = new ArrayList<>();
     private ConventionFileProcessor strategy;
     private matchType fileType;
+    Collection<String> missingSubmissions = new ArrayList<>();
 
     public Collection<File> getOrginalFileNames() {
         return this.originalFileNames;
@@ -21,30 +22,28 @@ public class FileProcessor {
 
     public Collection<File> renameFiles(Collection<File> filesToBeRenamed, File csvFile) {
         this.originalFileNames = filesToBeRenamed;
-
         for (File file : filesToBeRenamed) {
             fileType = new matchType(file);
             if (fileType.getFileType().equals("Convention1")) {
+
                 this.convention1Files.add(file);
                 strategy = new Con1ToCon2Processor(file, csvFile);
                 file = strategy.renameFile();
                 if (file != null) {
-                    System.out.println(file.getName());
                     this.renamedFiles.add(file);
                 }
             } else if (fileType.getFileType().equals("Convention2")) {
-                file = new File(file.getParent()+"/"+"renamedFiles/"+file.getName());
+                file = new File(file.getParent() + File.separator + "renamedFiles" + File.separator + file.getName());
                 this.renamedFiles.add(file);
             } else {
                 strategy = new NoConventionProcessor(file, csvFile);
                 file = strategy.renameFile();
                 if (file != null) {
-                    System.out.println(file.getName());
                     this.convention1Files.add(file);
+
                     strategy = new Con1ToCon2Processor(file, csvFile, strategy.getOriginalFileName());
                     file = strategy.renameFile();
                     if (file != null) {
-                        System.out.println(file.getName());
                         this.renamedFiles.add(file);
                     }
                 }
@@ -61,7 +60,7 @@ public class FileProcessor {
     }
 
     public Collection<String> getMissingSubmissions(File csvFile) {
-        Collection<String> missingSubmissions = new ArrayList<>();
+
         String line = "";
         String splitBy = ",";
         String fullName;
@@ -76,7 +75,6 @@ public class FileProcessor {
                 String[] assignment = line.split(splitBy);
                 if (!renamedFiles.isEmpty()) {
                     for (File file : renamedFiles) {
-                        // System.out.println(file.getName().substring(0, file.getName().indexOf("_")));
                         if (assignment[1].contains(file.getName().substring(0, file.getName().indexOf("_")))) {
                             found = true;
                         }
@@ -88,7 +86,7 @@ public class FileProcessor {
                     studentInfo = fullName + "_" + id;
                     missingSubmissions.add(studentInfo);
                 }
-
+                found=false;
             }
 
             br.close();

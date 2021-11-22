@@ -22,7 +22,7 @@ public class FileSaver {
         if (!renamedFiles.isEmpty()) {
             setOrginalFileNames(originalFileNames);
 
-            File dir = new File(location + "/" + "renamedFiles");
+            File dir = new File(location + File.separator + "renamedFiles");
 
             if (dir.mkdir() || dir.isDirectory()) {
                 Iterator<File> originalFiles = originalFileNames.iterator();
@@ -38,7 +38,7 @@ public class FileSaver {
                         e.printStackTrace();
                     }
                 }
-                System.out.println("'RenamedFiles'folder created.");
+                System.out.println("'renamedFiles'folder created.");
             } else {
                 System.out.println("Oops, Something went wrong! Unable to create 'renamedFiles'");
             }
@@ -52,7 +52,7 @@ public class FileSaver {
 
     public void getMissingSubmissions( Collection<String> missingSubmissions, String location){
         if(!missingSubmissions.isEmpty()) {
-            File dir = new File(location + "/" + "missingSubmission.txt");
+            File dir = new File(location +File.separator + "missingSubmission.txt");
             Iterator<String> missingNames = missingSubmissions.iterator();
             String names = "";
             try {

@@ -13,9 +13,8 @@ public class matchType {
     private Pattern NamewithWhiteSpace = Pattern.compile("[a-zA-Z]+\\s+[a-zA-Z]+");
     private Pattern threeNameswithSpaces = Pattern.compile("[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+");
     private Pattern twoNamewithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+");
-    private Pattern nameNoSpaces=Pattern.compile("[A-Z][a-zA-Z]+[A-Z]+[a-zA-Z]+");
-    private Pattern Identifier=Pattern.compile("61\\d\\d\\d\\d");
-   
+    private Pattern nameNoSpaces = Pattern.compile("[A-Z][a-zA-Z]+[A-Z]+[a-zA-Z]+");
+    private Pattern Identifier = Pattern.compile("_601\\d\\d\\d_");
 
     public matchType(File file) {
         this.file = file;
@@ -40,7 +39,12 @@ public class matchType {
         Matcher matcher4 = threeNameswithSpaces.matcher(file.getName());
         Matcher matcher5 = twoNamewithUnderscores.matcher(file.getName());
         Matcher matcher6 = nameNoSpaces.matcher(file.getName());
-        if (matcher1.find()) {
+        Matcher match = Identifier.matcher(file.getName());
+        if (match.find()) {
+            String[] id = match.group().split("_");
+            return id[1];
+        }
+        else if (matcher1.find()) {
             return matcher1.group();
         } else if (matcher2.find()) {
             return matcher2.group().replaceAll("_", " ");
@@ -58,26 +62,19 @@ public class matchType {
             return matcher4.group();
         } else if (matcher5.find()) {
             return matcher5.group().replace("_", " ");
-        }
-        else if(matcher6.find()){
+        } else if (matcher6.find()) {
             name = matcher6.group();
-            for(int k=1; k<name.length(); k++){
+            for (int k = 1; k < name.length(); k++) {
                 char letter = name.charAt(k);
-                if(Character.isUpperCase(letter)){
-                    name = name.substring(0,k)+" "+name.substring(k,name.length());
+                if (Character.isUpperCase(letter)) {
+                    name = name.substring(0, k) + " " + name.substring(k, name.length());
                     break;
                 }
             }
             return name;
         }
-        return null;
-    }
-    
-    public String getIdentifier(){
-        Matcher match = Identifier.matcher(file.getName());
-        if(match.find()){
-            return match.group();
-        }
+
+        System.out.println("No identifiers: " +file.getName());
         return null;
     }
 
