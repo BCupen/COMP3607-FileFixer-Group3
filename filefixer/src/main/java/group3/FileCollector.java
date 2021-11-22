@@ -18,6 +18,7 @@ public class FileCollector {
 
     public File writeToFiles(File srcFile, String zipPath) {
         ZipFile zipfile = null;
+        
         try {
             zipfile = new ZipFile(srcFile);
             Enumeration<? extends ZipEntry> e = zipfile.entries();

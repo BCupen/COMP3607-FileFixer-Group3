@@ -43,8 +43,7 @@ public class matchType {
         if (match.find()) {
             String[] id = match.group().split("_");
             return id[1];
-        }
-        else if (matcher1.find()) {
+        } else if (matcher1.find()) {
             return matcher1.group();
         } else if (matcher2.find()) {
             return matcher2.group().replaceAll("_", " ");
@@ -74,7 +73,7 @@ public class matchType {
             return name;
         }
 
-        System.out.println("No identifiers: " +file.getName());
+        System.out.println("No identifiers: " + file.getName());
         return null;
     }
 

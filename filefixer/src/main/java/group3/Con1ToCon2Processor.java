@@ -105,7 +105,8 @@ public class Con1ToCon2Processor implements ConventionFileProcessor {
 
             return file;
         } else {
-            System.out.println(file.getName() + " : " + "Invalid Identifier : Could Not Rename File to Convention 2 :"+this.trimFile());
+            System.out.println(file.getName() + " : " + "Invalid Identifier : Could Not Rename File to Convention 2 :"
+                    + this.trimFile());
             return null;
         }
     }
