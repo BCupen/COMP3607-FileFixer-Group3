@@ -10,7 +10,8 @@ public class NoConventionProcessor implements ConventionFileProcessor {
     private String fileInfo;
     private String originalFileName;
     private matchType findMatch;
-    private String Identifier;
+    private String match;
+    private String ID;
     private String fileName;
     private long[] randomNumbers = new long[2];
 
@@ -26,11 +27,11 @@ public class NoConventionProcessor implements ConventionFileProcessor {
     public File renameFile() {
         if(this.stitchFile()!=null){
             fileName=this.stitchFile();
-            file = new File(file.getParent()+"/"+fileName);
+            file = new File(file.getParent()+File.separator+fileName);
             return file;
             }
             else{
-                System.out.println("Invalid Identifier : Could Not Rename File");
+                System.out.println(file.getName()+" : "+ "Invalid Identifier : Could Not Rename File to Convention 1");
                 return null;
             }
     }
@@ -38,8 +39,8 @@ public class NoConventionProcessor implements ConventionFileProcessor {
     @Override
     public String trimFile() {
         findMatch = new matchType(this.file);
-        Identifier = findMatch.getSubstring();
-        return Identifier;
+        match = findMatch.getSubstring();
+        return match;
     }
 
     public String getOriginalFileName(){
@@ -84,8 +85,9 @@ public class NoConventionProcessor implements ConventionFileProcessor {
             BufferedReader br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
                 String[] assignment = line.split(splitBy);
-                if(this.trimFile()!=null){
-                if ((assignment[2].contains(this.trimFile()))||(assignment[1].contains(this.trimFile()))){
+                ID=this.trimFile();
+                if(ID!=null){
+                if ((assignment[2].contains(ID))||(assignment[1].contains(ID))||(assignment[0].contains(ID))){
                     fullIdentifier = assignment[0];
                     fullName = assignment[1];
                     String[] fN = fullName.split(" ");
