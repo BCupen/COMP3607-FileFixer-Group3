@@ -40,7 +40,6 @@ public class FileProcessor {
                 file = strategy.renameFile();
                 if (file != null) {
                     this.convention1Files.add(file);
-
                     strategy = new Con1ToCon2Processor(file, csvFile, strategy.getOriginalFileName());
                     file = strategy.renameFile();
                     if (file != null) {

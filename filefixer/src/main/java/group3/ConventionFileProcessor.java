@@ -3,8 +3,6 @@ package group3;
 import java.io.File;
 
 public interface ConventionFileProcessor {
-    
-  
 
     public File renameFile();
     public abstract String trimFile();

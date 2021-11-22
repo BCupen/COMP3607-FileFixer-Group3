@@ -45,7 +45,7 @@ public class FileRenamerFacade implements FileRenamer {
         folders = fileCollector.getFolders(location);
 
         for (File f : folders) {
-            System.out.println(f.getName()+" : ");
+            System.out.println(f.getName() + " : ");
             filesToBeRenamed = fileCollector.getFiles(f);
             csvFile = fileCollector.getCSV(f);
             convention1Files = fileProcessor.renameFiles(filesToBeRenamed, csvFile);
@@ -53,7 +53,8 @@ public class FileRenamerFacade implements FileRenamer {
             setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
             fileSaver.saveFiles(filesToBeRenamed, renamedFiles, f.toPath().toString());
             fileSaver.getMissingSubmissions(missingSubmissions, f.toPath().toString());
-            System.out.println("______________________________________________________________________________________________________");
+            System.out.println(
+                    "________________________________________________________________________________________________________________________________________________");
 
             fileCollector = new FileCollector();
             filesToBeRenamed = new ArrayList<>();
