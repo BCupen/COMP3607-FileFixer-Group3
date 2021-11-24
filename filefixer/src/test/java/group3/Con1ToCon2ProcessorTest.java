@@ -84,5 +84,32 @@ public class Con1ToCon2ProcessorTest {
 
     }
 
+    @Test
+    public void TestgetFileInfo(){
+
+        String actualResult1 = c1.getFileInfo();
+        String expectedResult1 = "Beth Morales-Horton_601683_assignsubmission_file_";
+
+        String actualResult2 = c2.getFileInfo();
+        String expectedResult2 = "Gloria Harmon_601720_assignsubmission_file_";
+        
+        String actualResult3 = c3.getFileInfo();
+        String expectedResult3 = "Darrell Rufus Porter_601706_assignsubmission_file_";
+
+        String actualResult4 = c4.getFileInfo();
+        String expectedResult4 = "Laurence Rodriguez_601724_assignsubmission_file_";
+
+        String actualResult5 = c5.getFileInfo();
+        String expectedResult5 = "Lorene Craig_601701_assignsubmission_file_";
+
+
+        assertEquals(expectedResult1, actualResult1);
+        assertEquals(expectedResult2, actualResult2);
+        assertEquals(expectedResult3, actualResult3);
+        assertEquals(expectedResult4, actualResult4);
+        assertEquals(expectedResult5, actualResult5);
+
+    }
+
     
 }
