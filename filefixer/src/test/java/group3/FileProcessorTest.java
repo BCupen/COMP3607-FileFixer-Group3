@@ -14,20 +14,15 @@ public class FileProcessorTest {
     private FileCollector fileCollector = new FileCollector();
     private FileProcessor fileProcessor = new FileProcessor();
     private static File location = new File("../filefixer/src/lib/filesToRename");
-    private FileRenamerFacade fixFiles = new FileRenamerFacade(location);
     private Collection<File> folders = new ArrayList<File>();
     private Collection<File> filesToBeRenamed = new ArrayList<File>();
-    private Collection<File> renamedFiles = new ArrayList<File>();
     private Collection<File> convention1Files = new ArrayList<File>();
     private File csvFile;
 
     private FileCollector fileCollectorTest = new FileCollector();
     private FileProcessor fileProcessorTest = new FileProcessor();
-    private FileRenamerFacade fixFilesTest = new FileRenamerFacade(location);
     private Collection<File> foldersTest = new ArrayList<File>();
     private Collection<File> filesToBeRenamedTest = new ArrayList<File>();
-    private Collection<File> renamedFilesTest = new ArrayList<File>();
-    private Collection<File> convention1FilesTest = new ArrayList<File>();
     private File csvFileTest;
 
     @BeforeEach
@@ -46,7 +41,7 @@ public class FileProcessorTest {
             System.out.println(f.getName()+" : ");
             filesToBeRenamedTest = fileCollectorTest.getFiles(f);
             csvFileTest = fileCollectorTest.getCSV(f);
-            convention1FilesTest = fileProcessorTest.renameFiles(filesToBeRenamedTest, csvFileTest);
+            fileProcessorTest.renameFiles(filesToBeRenamedTest, csvFileTest);
             
         }
          

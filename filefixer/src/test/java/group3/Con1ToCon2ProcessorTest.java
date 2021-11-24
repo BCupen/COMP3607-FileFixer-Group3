@@ -108,4 +108,61 @@ public class Con1ToCon2ProcessorTest {
         assertEquals(expectedResult5, actualResult5);
 
     }
+
+    @Test
+    public void TeststitchFile(){
+
+        String actualResult1 = c1.stitchFile();
+        String expectedResult1 = "Beth Morales-Horton_601683_assignsubmission_file_Assignment1_81305512.pdf";
+
+        String actualResult2 = c2.stitchFile();
+        String expectedResult2 = "Gloria Harmon_601720_assignsubmission_file_Assignment 1 -Info 2603.pdf";
+        
+        String actualResult3 = c3.stitchFile();
+        String expectedResult3 = "Darrell Rufus Porter_601706_assignsubmission_file_Assignment 1.pdf";
+
+        String actualResult4 = c4.stitchFile();
+        String expectedResult4 = "Laurence Rodriguez_601724_assignsubmission_file_Assignment 1 -Jelani Simmons(81370818).pdf";
+
+        String actualResult5 = c5.stitchFile();
+        String expectedResult5 = "Lorene Craig_601701_assignsubmission_file_INFO 2603 A1 81304445.pdf";
+
+
+        assertEquals(expectedResult1, actualResult1);
+        assertEquals(expectedResult2, actualResult2);
+        assertEquals(expectedResult3, actualResult3);
+        assertEquals(expectedResult4, actualResult4);
+        assertEquals(expectedResult5, actualResult5);
+
+
+    }
+
+
+    @Test
+    public void TestrenameFile(){
+
+        File actualResult1 = c1.renameFile();
+        File expectedResult1 = new File("../filefixer/src/lib/filesToRename/sample3/renamedFiles/Beth Morales-Horton_601683_assignsubmission_file_Assignment1_81305512.pdf");
+
+        File actualResult2 = c2.renameFile();
+        File expectedResult2 = new File ("../filefixer/src/lib/filesToRename/sample3/renamedFiles/Gloria Harmon_601720_assignsubmission_file_Assignment 1 -Info 2603.pdf");
+        
+        File actualResult3 = c3.renameFile();
+        File expectedResult3 = new File ("../filefixer/src/lib/filesToRename/sample3/renamedFiles/Darrell Rufus Porter_601706_assignsubmission_file_Assignment 1.pdf");
+
+        File actualResult4 = c4.renameFile();
+        File expectedResult4 = new File ("../filefixer/src/lib/filesToRename/sample3/renamedFiles/Laurence Rodriguez_601724_assignsubmission_file_Assignment 1 -Jelani Simmons(81370818).pdf");
+
+        File actualResult5 = c5.renameFile();
+        File expectedResult5 = new File ("../filefixer/src/lib/filesToRename/sample3/renamedFiles/Lorene Craig_601701_assignsubmission_file_INFO 2603 A1 81304445.pdf");
+
+
+        assertEquals(expectedResult1, actualResult1);
+        assertEquals(expectedResult2, actualResult2);
+        assertEquals(expectedResult3, actualResult3);
+        assertEquals(expectedResult4, actualResult4);
+        assertEquals(expectedResult5, actualResult5);
+
+
+    }
 }
