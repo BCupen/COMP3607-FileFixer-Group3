@@ -1,9 +1,9 @@
 package group3;
 
 // import org.junit.jupiter.api.AfterEach; //previously After
-// import org.junit.jupiter.api.AfterAll; //previously AfterClass
+import org.junit.jupiter.api.AfterAll; //previously AfterClass
 import org.junit.jupiter.api.BeforeEach; //previously Before
-// import org.junit.jupiter.api.BeforeAll;  //previously BeforeClass in Junit4
+import org.junit.jupiter.api.BeforeAll;  //previously BeforeClass in Junit4
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,9 +37,20 @@ public class FileSaverTest {
     private FileProcessor fileProcessorTest = new FileProcessor();
     private FileSaver fileSaverTest = new FileSaver();
     private File csvFileTest;
+    
 
+    @BeforeAll
+    public static void setUpClass() {
+    }
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
     @BeforeEach
     public void setup(){
+
+        
         folders = fileCollector.getFolders(location);
 
         for (File f : folders) {
@@ -51,34 +62,7 @@ public class FileSaverTest {
             fixFiles.setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
             fileSaver.saveFiles(filesToBeRenamed, renamedFiles, f.toPath().toString());
             fileSaver.getMissingSubmissions(missingSubmissions, f.toPath().toString());
-
-            // fileCollector = new FileCollector();
-            // filesToBeRenamed = new ArrayList<>();
-            // renamedFiles = new ArrayList<>();
-            // missingSubmissions = new ArrayList<>();
-            // fileProcessor = new FileProcessor();
-            // fileSaver = new FileSaver();
         }
-    }
-
-    @Test 
-    public void testGetOriginalFileNames(){
-        Collection<File> originalFiles = new ArrayList<File>();
-        originalFiles = fileSaver.getOrginalFileNames();
-
-        FileRenamerFacade fixFilesTest = new FileRenamerFacade(location);
-        Collection<File> foldersTest = new ArrayList<File>();
-        Collection<File> filesToBeRenamedTest = new ArrayList<File>();
-        Collection<File> renamedFilesTest = new ArrayList<File>();
-        Collection<String> missingSubmissionsTest = new ArrayList<String>();
-        Collection<File> convention1FilesTest = new ArrayList<File>();
-    
-        FileCollector fileCollectorTest = new FileCollector();
-        FileProcessor fileProcessorTest = new FileProcessor();
-        FileSaver fileSaverTest = new FileSaver();
-        File csvFileTest;
-
-        foldersTest = fileCollectorTest.getFolders(location);
 
         for (File f : foldersTest) {
             System.out.println(f.getName()+" : ");
@@ -91,10 +75,52 @@ public class FileSaverTest {
             fileSaverTest.getMissingSubmissions(missingSubmissionsTest, f.toPath().toString());
         }
 
+    }
+
+    @Test 
+    public void testGetOriginalFileNames(){
+        System.out.println("getOriginalFileNames()");
+        Collection<File> originalFiles = new ArrayList<File>();
+        originalFiles = fileSaver.getOrginalFileNames();
+        foldersTest = fileCollectorTest.getFolders(location);
+
         Collection<File> expectedResult = new ArrayList<File>();
         expectedResult = fileSaverTest.getOrginalFileNames();
 
         assertEquals(expectedResult, originalFiles);
     }
-    
+
+    @Test
+    public void testSetMissingSubmissions(){
+        System.out.println("setMissingSubmission()");
+        File file1 = new File("../filefixer/src/lib/filesToRename/sample5/missingSubmission.txt");
+        File file2 = new File("../filefixer/src/lib/filesToRename/sample1/missingSubmission.txt");
+        assertTrue(file1.exists());
+        assertTrue(file2.exists());
+
+    }
+
+    @Test
+    public void testGetNewFileNames(){
+        System.out.println("getNewFileNames()");
+        Collection<File> result = new ArrayList<File>();
+        Collection<File> expectedResult = new ArrayList<File>();
+
+        result = fileSaver.getNewFileNames();
+        expectedResult = fileSaverTest.getNewFileNames();
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testSetOriginalFileNames(){
+        System.out.println("setOriginalFileNames()");
+        Collection<File> expectedResult = new ArrayList<File>();
+        expectedResult = fileSaverTest.getNewFileNames();
+        fileSaver.setOrginalFileNames(expectedResult);
+
+        assertEquals(expectedResult, fileSaver.getOrginalFileNames());
+
+
+    }
 }
