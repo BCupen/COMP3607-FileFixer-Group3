@@ -1,9 +1,6 @@
 package group3;
 
-// import org.junit.jupiter.api.AfterEach; //previously After
-import org.junit.jupiter.api.AfterAll; //previously AfterClass
 import org.junit.jupiter.api.BeforeEach; //previously Before
-import org.junit.jupiter.api.BeforeAll;  //previously BeforeClass in Junit4
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
