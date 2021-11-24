@@ -1,8 +1,6 @@
 package group3;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 public class FileCollectorTest {
+    FileRenamerFacade fixFiles;
     private FileCollector fileCollector;
-    private File path = new File ("filefixer/src/lib/filesToRename/sample1");
+    private File loc;
 
     @BeforeEach
     public void setUp(){
@@ -19,8 +18,16 @@ public class FileCollectorTest {
     }
 
     @Test
-    public void test(){
-        System.out.println(fileCollector.getCSV(path));
+    public void testGetCSV(){
+        System.out.println("getCSV()");
+        loc = new File ("../filefixer/src/lib/filesToRename/sample1");
+        File result = fileCollector.getCSV(loc);
+
+        FileCollector collector2 = new FileCollector();
+        File expectedResult = collector2.getCSV(loc);
+
+        assertEquals(expectedResult, result);
+        
     }
 
 }
