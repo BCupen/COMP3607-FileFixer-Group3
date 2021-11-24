@@ -9,7 +9,7 @@ public class NoConventionProcessor implements ConventionFileProcessor {
     private File file;
     private String fileInfo;
     private String originalFileName;
-    private MatchType findMatch;
+    private matchType findMatch;
     private String match;
     private String ID;
     private String fileName;
@@ -38,7 +38,7 @@ public class NoConventionProcessor implements ConventionFileProcessor {
 
     @Override
     public String trimFile() {
-        findMatch = new MatchType(this.file);
+        findMatch = new matchType(this.file);
         match = findMatch.getSubstring();
         return match;
     }

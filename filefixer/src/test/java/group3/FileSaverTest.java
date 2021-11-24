@@ -63,7 +63,8 @@ public class FileSaverTest {
             fileSaver.saveFiles(filesToBeRenamed, renamedFiles, f.toPath().toString());
             fileSaver.getMissingSubmissions(missingSubmissions, f.toPath().toString());
         }
-
+        
+        foldersTest = fileCollectorTest.getFolders(location);
         for (File f : foldersTest) {
             System.out.println(f.getName()+" : ");
             filesToBeRenamedTest = fileCollectorTest.getFiles(f);
@@ -74,7 +75,6 @@ public class FileSaverTest {
             fileSaverTest.saveFiles(filesToBeRenamedTest, renamedFilesTest, f.toPath().toString());
             fileSaverTest.getMissingSubmissions(missingSubmissionsTest, f.toPath().toString());
         }
-
     }
 
     @Test 

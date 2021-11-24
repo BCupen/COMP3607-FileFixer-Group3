@@ -3,7 +3,7 @@ package group3;
 import java.io.File;
 import java.util.regex.*;
 
-public class MatchType {
+public class matchType {
     private File file;
     private String name = null;
     private Pattern pattern1 = Pattern.compile("^.*_[0-9]+_assignsubmission_file_.*$");
@@ -16,7 +16,7 @@ public class MatchType {
     private Pattern nameNoSpaces = Pattern.compile("[A-Z][a-zA-Z]+[A-Z]+[a-zA-Z]+");
     private Pattern Identifier = Pattern.compile("_601\\d\\d\\d_");
 
-    public MatchType(File file) {
+    public matchType(File file) {
         this.file = file;
     }
 

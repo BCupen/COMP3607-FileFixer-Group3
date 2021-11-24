@@ -22,6 +22,7 @@ public class FileCollectorTest {
 
     @Test
     public void testGetFiles(){
+        System.out.println("getFiles()");
         List<File> allFiles = Arrays.asList(path.listFiles());
         ArrayList<File> expected =  new ArrayList<File>();
         for(File f: allFiles){
@@ -45,19 +46,5 @@ public class FileCollectorTest {
         assertEquals(expectedResult, result);
         
     }  
-
-    // @Test
-    // public void testGetFolders(){
-    //     path = new File("../filefixer/src/lib/filesToRename/Cases");
-    //     List<File> allFiles = Arrays.asList(path.listFiles());
-    //     ArrayList<File> expected = new ArrayList<File>();
-    //     for (File f: allFiles){
-    //         if(f.getName().endsWith(".zip"))
-    //             expected.add(f);
-    //     }
-
-    //     List<File> actualFolders = (List<File>)fileCollector.getFolders(path);
-    //     assertNull(actualFolders);
-    // }
 
 }

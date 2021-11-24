@@ -9,7 +9,7 @@ public class FileProcessor {
     private Collection<File> convention1Files;
     private Collection<File> renamedFiles;
     private ConventionFileProcessor strategy;
-    private MatchType fileType;
+    private matchType fileType;
     Collection<String> missingSubmissions;
     
     public FileProcessor(){
@@ -29,7 +29,7 @@ public class FileProcessor {
     public Collection<File> renameFiles(Collection<File> filesToBeRenamed, File csvFile) {
         this.originalFileNames = filesToBeRenamed;
         for (File file : filesToBeRenamed) {
-            fileType = new MatchType(file);
+            fileType = new matchType(file);
             if (fileType.getFileType().equals("Convention1")) {
 
                 this.convention1Files.add(file);
