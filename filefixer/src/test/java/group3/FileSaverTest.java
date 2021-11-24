@@ -1,13 +1,15 @@
 package group3;
 
+// import org.junit.jupiter.api.AfterEach; //previously After
+import org.junit.jupiter.api.AfterAll; //previously AfterClass
+import org.junit.jupiter.api.BeforeEach; //previously Before
+import org.junit.jupiter.api.BeforeAll;  //previously BeforeClass in Junit4
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.File;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class FileSaverTest {
 
@@ -17,6 +19,8 @@ public class FileSaverTest {
     private Collection<File> filesToBeRenamed = new ArrayList<File>();
     private Collection<File> renamedFiles = new ArrayList<File>();
     private Collection<String> missingSubmissions = new ArrayList<String>();
+    private Collection<File> convention1Files = new ArrayList<File>();
+
     private FileCollector fileCollector = new FileCollector();
     private FileProcessor fileProcessor= new FileProcessor();
     private FileSaver fileSaver = new FileSaver();
@@ -33,7 +37,16 @@ public class FileSaverTest {
     private FileProcessor fileProcessorTest = new FileProcessor();
     private FileSaver fileSaverTest = new FileSaver();
     private File csvFileTest;
-        
+    
+
+    @BeforeAll
+    public static void setUpClass() {
+    }
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
     @BeforeEach
     public void setup(){
 
@@ -44,7 +57,7 @@ public class FileSaverTest {
             System.out.println(f.getName()+" : ");
             filesToBeRenamed = fileCollector.getFiles(f);
             csvFile = fileCollector.getCSV(f);
-            fileProcessor.renameFiles(filesToBeRenamed, csvFile);
+            convention1Files = fileProcessor.renameFiles(filesToBeRenamed, csvFile);
             renamedFiles = fileProcessor.getRenamedFiles();
             fixFiles.setMissingSubmissions(fileProcessor.getMissingSubmissions(csvFile));
             fileSaver.saveFiles(filesToBeRenamed, renamedFiles, f.toPath().toString());
@@ -52,15 +65,15 @@ public class FileSaverTest {
         }
         
         foldersTest = fileCollectorTest.getFolders(location);
-        for (File file : foldersTest) {
-            System.out.println(file.getName()+" : ");
-            filesToBeRenamedTest = fileCollectorTest.getFiles(file);
-            csvFileTest = fileCollectorTest.getCSV(file);
-            fileProcessorTest.renameFiles(filesToBeRenamedTest, csvFileTest);
+        for (File f : foldersTest) {
+            System.out.println(f.getName()+" : ");
+            filesToBeRenamedTest = fileCollectorTest.getFiles(f);
+            csvFileTest = fileCollectorTest.getCSV(f);
+            convention1FilesTest = fileProcessorTest.renameFiles(filesToBeRenamedTest, csvFileTest);
             renamedFilesTest = fileProcessorTest.getRenamedFiles();
             fixFilesTest.setMissingSubmissions(fileProcessorTest.getMissingSubmissions(csvFileTest));
-            fileSaverTest.saveFiles(filesToBeRenamedTest, renamedFilesTest, file.toPath().toString());
-            fileSaverTest.getMissingSubmissions(missingSubmissionsTest, file.toPath().toString());
+            fileSaverTest.saveFiles(filesToBeRenamedTest, renamedFilesTest, f.toPath().toString());
+            fileSaverTest.getMissingSubmissions(missingSubmissionsTest, f.toPath().toString());
         }
     }
 

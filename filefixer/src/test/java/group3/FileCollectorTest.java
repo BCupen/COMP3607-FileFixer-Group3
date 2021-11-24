@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 
+import java.io.File;
 public class FileCollectorTest {
     private static FileCollector fileCollector;
     private File path = new File ("../filefixer/src/lib/filesToRename/sample1");

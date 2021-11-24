@@ -8,12 +8,11 @@ public class FileCollector {
     private Collection<File> folders;
     private Collection<File> files;
     private File csv = null;
-    private File newDest;
+    private File newDest = null;
 
     public FileCollector() {
         files = new ArrayList<>();
         folders = new ArrayList<>();
-
     }
 
     public File writeToFiles(File srcFile, String zipPath) {
