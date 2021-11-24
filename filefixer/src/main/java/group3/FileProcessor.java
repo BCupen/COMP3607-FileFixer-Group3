@@ -25,7 +25,6 @@ public class FileProcessor {
         for (File file : filesToBeRenamed) {
             fileType = new matchType(file);
             if (fileType.getFileType().equals("Convention1")) {
-
                 this.convention1Files.add(file);
                 strategy = new Con1ToCon2Processor(file, csvFile);
                 file = strategy.renameFile();
