@@ -6,11 +6,17 @@ import java.util.*;
 public class FileProcessor {
 
     private Collection<File> originalFileNames;
-    private Collection<File> convention1Files = new ArrayList<>();
-    private Collection<File> renamedFiles = new ArrayList<>();
+    private Collection<File> convention1Files;
+    private Collection<File> renamedFiles;
     private ConventionFileProcessor strategy;
     private matchType fileType;
-    Collection<String> missingSubmissions = new ArrayList<>();
+    Collection<String> missingSubmissions;
+    
+    public FileProcessor(){
+        convention1Files = new ArrayList<>();
+        renamedFiles = new ArrayList<>();
+        missingSubmissions = new ArrayList<>();
+    }
 
     public Collection<File> getOrginalFileNames() {
         return this.originalFileNames;
@@ -59,7 +65,6 @@ public class FileProcessor {
     }
 
     public Collection<String> getMissingSubmissions(File csvFile) {
-
         String line = "";
         String splitBy = ",";
         String fullName;

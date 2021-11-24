@@ -1,5 +1,6 @@
 package group3;
 
+<<<<<<< HEAD
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -7,6 +8,14 @@ import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
+=======
+import java.io.File;
+
+// import org.junit.jupiter.api.AfterEach; //previously After
+import org.junit.jupiter.api.BeforeEach; //previously Before
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7
 
 public class Con1ToCon2ProcessorTest {
 
@@ -19,7 +28,11 @@ public class Con1ToCon2ProcessorTest {
     private File file5 = new File("../filefixer/src/lib/filesToRename/sample3/1420369269-602492_Lorene_Craig_601701_INFO 2603 A1 81304445.pdf");
 
 
+<<<<<<< HEAD
     @Before
+=======
+    @BeforeEach
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7
     public void setUp(){ 
 
         c1 = new Con1ToCon2Processor(file1, csvFile);
@@ -31,9 +44,14 @@ public class Con1ToCon2ProcessorTest {
      }
 
     @Test
+<<<<<<< HEAD
     public void TestgetOriginalFileName()
     {
         
+=======
+    public void TestgetOriginalFileName(){
+        System.out.println("getOriginalFileName()");
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7
         String actualResult1 = c1.getOriginalFileName();
         String expectedResult1 = "Assignment1_81305512.pdf";
 
@@ -59,7 +77,11 @@ public class Con1ToCon2ProcessorTest {
     
     @Test
     public void TesttrimFile(){
+<<<<<<< HEAD
 
+=======
+        System.out.println("trimFile()");
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7
         String actualResult1 = c1.trimFile();
         String expectedResult1 = "601683";
 
@@ -86,7 +108,11 @@ public class Con1ToCon2ProcessorTest {
 
     @Test
     public void TestgetFileInfo(){
+<<<<<<< HEAD
 
+=======
+        System.out.println("getFileInfo()");
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7
         String actualResult1 = c1.getFileInfo();
         String expectedResult1 = "Beth Morales-Horton_601683_assignsubmission_file_";
 
@@ -110,6 +136,7 @@ public class Con1ToCon2ProcessorTest {
         assertEquals(expectedResult5, actualResult5);
 
     }
+<<<<<<< HEAD
 
     @Test
     public void TeststitchFile(){
@@ -169,3 +196,6 @@ public class Con1ToCon2ProcessorTest {
     }
     
 }
+=======
+}
+>>>>>>> b48c989d3773ae45a90d7cd2636e354460a591d7

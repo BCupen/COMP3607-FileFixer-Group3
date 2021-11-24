@@ -10,9 +10,9 @@ public class matchType {
     private Pattern pattern2 = Pattern.compile("^[0-9]+-[0-9]+_([a-zA-Z]+((_)?(OΓÇÖ)?(-)?[a-zA-Z]+)+)_[0-9]+_.*$");
     private Pattern ID = Pattern.compile("81\\d\\d\\d\\d\\d\\d");
     private Pattern threeNamewithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+_[a-zA-Z]+");
-    private Pattern NamewithWhiteSpace = Pattern.compile("[a-zA-Z]+\\s+[a-zA-Z]+");
-    private Pattern threeNameswithSpaces = Pattern.compile("[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+");
-    private Pattern twoNamewithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+");
+    private Pattern nameWithWhiteSpace = Pattern.compile("[a-zA-Z]+\\s+[a-zA-Z]+");
+    private Pattern threeNamesWithSpaces = Pattern.compile("[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+");
+    private Pattern twoNameWithUnderscores = Pattern.compile("[a-zA-Z]+_[a-zA-Z]+");
     private Pattern nameNoSpaces = Pattern.compile("[A-Z][a-zA-Z]+[A-Z]+[a-zA-Z]+");
     private Pattern Identifier = Pattern.compile("_601\\d\\d\\d_");
 
@@ -35,9 +35,9 @@ public class matchType {
     public String getSubstring() {
         Matcher matcher1 = ID.matcher(file.getName());
         Matcher matcher2 = threeNamewithUnderscores.matcher(file.getName());
-        Matcher matcher3 = NamewithWhiteSpace.matcher(file.getName());
-        Matcher matcher4 = threeNameswithSpaces.matcher(file.getName());
-        Matcher matcher5 = twoNamewithUnderscores.matcher(file.getName());
+        Matcher matcher3 = nameWithWhiteSpace.matcher(file.getName());
+        Matcher matcher4 = threeNamesWithSpaces.matcher(file.getName());
+        Matcher matcher5 = twoNameWithUnderscores.matcher(file.getName());
         Matcher matcher6 = nameNoSpaces.matcher(file.getName());
         Matcher match = Identifier.matcher(file.getName());
         if (match.find()) {
