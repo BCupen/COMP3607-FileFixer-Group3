@@ -90,20 +90,20 @@ public class FileCollector {
 
     public Collection<File> getFolders(File loc) {
         List<File> allfolders = Arrays.asList(loc.listFiles());
-        File fDest = new File(loc.getAbsolutePath());
-        if (!fDest.exists()) {
-            fDest.mkdirs();
-        }
         for (File f : allfolders) {
             if (!f.isDirectory() && f.getName().endsWith(".zip")) {
                 newDest = unzipFile(f);
                 folders.add(newDest);
-            } else {
+            } 
+            else {
                 List<File> allzipfoldersinSubFile = Arrays.asList(f.listFiles());
                 for (File sf : allzipfoldersinSubFile) {
                     if (!sf.isDirectory() && sf.getName().endsWith(".zip")) {
                         newDest = unzipSubFile(sf);
                         folders.add(newDest);
+                    }
+                    else if(sf.isDirectory()){
+                        folders.add(sf);
                     }
                 }
             }
